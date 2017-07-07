@@ -9,5 +9,5 @@ public class IgnoreController {
 	@RequestMapping("hello")
 	public String hello() {
 		return "you call ignore hello word controller.";
-	}
+	} 
 }
