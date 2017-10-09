@@ -18,10 +18,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private DataSource dataSource;
 
 	private static final String DEF_USERS_BY_USERNAME_QUERY = "select username,password,enabled from sys_user where username = ?";
+	/**
+	 * 返回的结果只使用了第二个字段，authority_name
+	 */
 	private static final String DEF_AUTHORITIES_BY_USERNAME_QUERY = "select g.role_id, gat.authority_name "
 			+ "from sys_role g, sys_user_role gm, sys_role_authority ga ,sys_authority gat,sys_user u" + " where "
 			+ "u.username =?" + " and " + "gm.user_id = u.user_id" + " and " + "g.role_id = ga.role_id" + " and "
 			+ "g.role_id = gm.role_id" + " and " + "ga.authority_id = gat.authority_id";
+	/**
+	 * 返回的结果只使用了第三个字段，authority_name
+	 */
 	private static final String DEF_GROUP_AUTHORITIES_BY_USERNAME_QUERY = "select g.role_id, g.role_name, gat.authority_name "
 			+ "from sys_role g, sys_user_role gm, sys_role_authority ga ,sys_authority gat,sys_user u" + " where "
 			+ "u.username =?" + " and " + "gm.user_id = u.user_id" + " and " + "g.role_id = ga.role_id" + " and "
@@ -41,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-//		 httpSecurity.authorizeRequests().antMatchers("/auth/**").hasAuthority("authority_hello");
+		// httpSecurity.authorizeRequests().antMatchers("/auth/**").hasAuthority("authority_hello");
 		httpSecurity.httpBasic();
 	}
 
